@@ -9,6 +9,7 @@ import com.example.medicalclinic.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoctorService {
@@ -39,6 +40,22 @@ public class DoctorService {
         } else {
             throw new DoctorAlreadyExistsException();
         }
+    }
+
+    public DoctorDto updateDoctor(final Long doctorId, final DoctorDto doctorDto) throws DoctorNotFoundException {
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+        if (doctorOptional.isPresent()) {
+            Doctor existDoctor = doctorOptional.get();
+            existDoctor.setName(doctorDto.getName());
+            existDoctor.setLastname(doctorDto.getLastname());
+            existDoctor.setSpecialization(doctorDto.getSpecialization());
+            existDoctor.setNumberPWZ(doctorDto.getNumberPWZ());
+            Doctor updateDoctor = doctorRepository.save(existDoctor);
+            return doctorMapper.mapToDoctorDto(updateDoctor);
+        } else {
+            throw new DoctorNotFoundException();
+        }
+
     }
 
     public void deleteDoctor(final Long doctorId) throws DoctorNotFoundException {

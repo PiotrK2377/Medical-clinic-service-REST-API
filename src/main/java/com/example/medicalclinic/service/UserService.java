@@ -40,11 +40,20 @@ public class UserService {
         }
     }
 
-    public UserDto updateUser(final UserDto userDto) throws UserNotFoundException {
-        userRepository.findById(userDto.getId()).orElseThrow(UserNotFoundException::new);
-        User user = userMapper.mapToUser(userDto);
-        User updateUser = userRepository.save(user);
-        return userMapper.mapToUserDto(updateUser);
+    public UserDto updateUser(final Long userId, final UserDto userDto) throws UserNotFoundException {
+       Optional<User> userOptional = userRepository.findById(userId);
+       if (userOptional.isPresent()) {
+           User existUser = userOptional.get();
+           existUser.setName(userDto.getName());
+           existUser.setLastname(userDto.getLastname());
+           existUser.setPeselNumber(userDto.getPeselNumber());
+           existUser.setEmail(userDto.getEmail());
+           existUser.setPhoneNumber(userDto.getPhoneNumber());
+           User updateUser = userRepository.save(existUser);
+           return userMapper.mapToUserDto(updateUser);
+       } else {
+           throw new UserNotFoundException();
+       }
     }
 
     public void deleteUser(final Long userId) throws UserNotFoundException {

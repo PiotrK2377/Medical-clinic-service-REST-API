@@ -34,7 +34,7 @@ public class ReviewMapper {
         );
     }
 
-    public ReviewDto mapToReview(Review review) {
+    public ReviewDto mapToReviewDto(Review review) {
         User user = review.getUser();
         Doctor doctor = review.getDoctor();
         return new ReviewDto(
@@ -48,7 +48,7 @@ public class ReviewMapper {
 
     public List<ReviewDto> mapToReviewDtoList(List<Review> reviewList) {
         return reviewList.stream()
-                .map(this::mapToReview)
+                .map(this::mapToReviewDto)
                 .collect(Collectors.toList());
     }
 }
