@@ -1,6 +1,8 @@
 package com.example.medicalclinic.domain;
 
+import com.example.medicalclinic.enumclass.Rating;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "REVIEWS")
@@ -27,7 +30,7 @@ public class Review {
     private Doctor doctor;
 
     @Column(name = "RATING")
-    private int rating;
+    private Rating rating;
 
     @Column(name = "COMMENT")
     private String comment;

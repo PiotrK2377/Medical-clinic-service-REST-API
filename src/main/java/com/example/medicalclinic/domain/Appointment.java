@@ -1,6 +1,8 @@
 package com.example.medicalclinic.domain;
 
+import com.example.medicalclinic.enumclass.AppointmentStatus;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "APPOINTMENTS")
@@ -32,5 +35,5 @@ public class Appointment {
     private Date appointmentDate;
 
     @Column(name = "STATUS")
-    private String status;
+    private AppointmentStatus status;
 }

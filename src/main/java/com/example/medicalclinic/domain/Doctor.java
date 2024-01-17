@@ -1,5 +1,8 @@
 package com.example.medicalclinic.domain;
 
+import com.example.medicalclinic.enumclass.DoctorSpecialization;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +11,9 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "DOCTORS")
 public class Doctor {
 
@@ -24,7 +29,7 @@ public class Doctor {
     private String lastname;
 
     @Column(name = "SPECIALIZATION")
-    private String specialization;
+    private DoctorSpecialization specialization;
 
     @Column(name = "PWZ_NUMBER")
     private String numberPWZ;
@@ -45,7 +50,7 @@ public class Doctor {
     )
     private List<Review> reviews;
 
-    public Doctor(Long id, String name, String lastname, String specialization, String numberPWZ) {
+    public Doctor(Long id, String name, String lastname, DoctorSpecialization specialization, String numberPWZ) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
