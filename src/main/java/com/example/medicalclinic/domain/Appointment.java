@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -31,8 +32,7 @@ public class Appointment {
     private Doctor doctor;
 
     @Column(name = "APPOINTMENT_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
 
     @Column(name = "STATUS")
     private AppointmentStatus status;

@@ -31,11 +31,12 @@ dependencies {
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
 	implementation 'org.slf4j:slf4j-api:1.7.32'
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'com.google.code.gson:gson'
+	testImplementation 'com.google.code.gson:gson:2.8.8'
 }
 
 dependencyManagement {

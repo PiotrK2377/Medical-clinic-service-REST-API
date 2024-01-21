@@ -1,7 +1,5 @@
 package com.example.medicalclinic.controller;
 
-
-import com.example.medicalclinic.domain.User;
 import com.example.medicalclinic.dto.UserDto;
 import com.example.medicalclinic.exception.UserAlreadyExistsException;
 import com.example.medicalclinic.exception.UserNotFoundException;

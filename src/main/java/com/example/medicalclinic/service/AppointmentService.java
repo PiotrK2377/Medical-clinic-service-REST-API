@@ -1,6 +1,8 @@
 package com.example.medicalclinic.service;
 
+import com.example.medicalclinic.config.AdminConfig;
 import com.example.medicalclinic.domain.Appointment;
+import com.example.medicalclinic.domain.Mail;
 import com.example.medicalclinic.dto.AppointmentDto;
 import com.example.medicalclinic.exception.AppointmentAlreadyExistsException;
 import com.example.medicalclinic.exception.AppointmentNotFoundException;
@@ -16,6 +18,8 @@ public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
+    private SimpleEmailService emailService;
+    private AdminConfig adminConfig;
 
     public AppointmentService(AppointmentRepository appointmentRepository, AppointmentMapper appointmentMapper) {
         this.appointmentRepository = appointmentRepository;
@@ -37,6 +41,7 @@ public class AppointmentService {
         boolean isExisting = appointmentRepository.existsByAppointmentDate(appointment.getAppointmentDate());
         if (!isExisting) {
             appointmentRepository.save(appointment);
+            sendAppointmentConfirmationEmail(appointmentDto);
         } else {
             throw new AppointmentAlreadyExistsException();
         }
@@ -61,5 +66,14 @@ public class AppointmentService {
         } catch (Exception exception) {
             throw new AppointmentNotFoundException();
         }
+    }
+
+    private void sendAppointmentConfirmationEmail(AppointmentDto appointmentDto) {
+        Mail mail = new Mail(
+                adminConfig.getAdminMail(),
+                "New Appointment Confirmation",
+                "Your appointment has been successfully created. Date: " + appointmentDto.getAppointmentDate()
+        );
+        emailService.send(mail);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -17,6 +18,11 @@ public class AppointmentDto {
     private Long id;
     private UserDto userDto;
     private DoctorDto doctorDto;
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
     private AppointmentStatus status;
+
+    public AppointmentDto(LocalDate appointmentDate, AppointmentStatus status) {
+        this.appointmentDate = appointmentDate;
+        this.status = status;
+    }
 }

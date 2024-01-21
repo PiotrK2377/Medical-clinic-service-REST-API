@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -82,11 +83,12 @@ class AppointmentMapperTest {
     @Test
     void testMapToAppointment() {
         //Given
+        LocalDate localDate = LocalDate.now();
         AppointmentDto appointmentDto = AppointmentDto.builder()
                 .id(1L)
                 .userDto(userDto)
                 .doctorDto(doctorDto)
-                .appointmentDate(new Date())
+                .appointmentDate(localDate)
                 .status(AppointmentStatus.CONFIRMED)
                 .build();
 
@@ -103,11 +105,12 @@ class AppointmentMapperTest {
     @Test
     void testMapToAppointmentDto() {
         //Given
+        LocalDate localDate = LocalDate.now();
         Appointment appointment = Appointment.builder()
                 .id(1L)
                 .user(user)
                 .doctor(doctor)
-                .appointmentDate(new Date())
+                .appointmentDate(localDate)
                 .status(AppointmentStatus.COMPLETED)
                 .build();
 
@@ -123,11 +126,12 @@ class AppointmentMapperTest {
     @Test
     void testMapToAppointmentDtoList() {
         //Given
+        LocalDate localDate = LocalDate.now();
         Appointment appointment1 = Appointment.builder()
                 .id(1L)
                 .user(user)
                 .doctor(doctor)
-                .appointmentDate(new Date())
+                .appointmentDate(localDate)
                 .status(AppointmentStatus.CONFIRMED)
                 .build();
 
@@ -135,7 +139,7 @@ class AppointmentMapperTest {
                 .id(2L)
                 .user(user)
                 .doctor(doctor)
-                .appointmentDate(new Date())
+                .appointmentDate(localDate)
                 .status(AppointmentStatus.CANCELLED)
                 .build();
 
